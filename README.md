@@ -6,11 +6,21 @@ A REST API built with Node.js, Express, and MySQL to manage school data — supp
 
 Base URL: `https://schoolmanagement-api-ee8h.onrender.com`
 
+> Note: Free Render instance spins down after inactivity. First request may take ~30 seconds to wake up.
+
+---
+
+## Postman Collection
+
+Import and test all endpoints directly:
+
+[View Postman Collection](https://github.com/ASrivatsav27/SchoolManagement-API/blob/main/postman_collection.json)
+
 ---
 
 ## Using the Live API
 
-No setup needed — just use the base URL directly in Postman or any HTTP client.
+No setup needed — use the base URL directly in Postman or any HTTP client.
 
 ### Add a School
 
@@ -40,8 +50,6 @@ GET https://schoolmanagement-api-ee8h.onrender.com/school/list-schools?latitude=
 ```
 
 No body needed — returns all schools sorted by distance from the given coordinates.
-
-> Note: The free Render instance spins down after inactivity. First request may take ~30 seconds to wake up.
 
 ---
 
@@ -217,6 +225,7 @@ SchoolManagement-API/
 │   ├── .gitignore
 │   ├── package.json
 │   └── server.js
+├── postman_collection.json
 └── README.md
 ```
 
@@ -234,9 +243,3 @@ CREATE TABLE schools (
   created_at  TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 ```
-
----
-
-## Postman Collection
-
-Import the collection to test all endpoints — includes example requests and expected responses for both APIs.
