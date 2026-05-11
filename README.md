@@ -4,7 +4,44 @@ A REST API built with Node.js, Express, and MySQL to manage school data — supp
 
 ## Live API
 
-Base URL: `https://your-app.onrender.com`
+Base URL: `https://schoolmanagement-api-ee8h.onrender.com`
+
+---
+
+## Using the Live API
+
+No setup needed — just use the base URL directly in Postman or any HTTP client.
+
+### Add a School
+
+```
+POST https://schoolmanagement-api-ee8h.onrender.com/school/add-school
+```
+
+Set header:
+```
+Content-Type: application/json
+```
+
+Body:
+```json
+{
+  "name": "Green Valley School",
+  "address": "123 MG Road, Hyderabad",
+  "latitude": 17.385044,
+  "longitude": 78.486671
+}
+```
+
+### List Schools by Proximity
+
+```
+GET https://schoolmanagement-api-ee8h.onrender.com/school/list-schools?latitude=17.385044&longitude=78.486671
+```
+
+No body needed — returns all schools sorted by distance from the given coordinates.
+
+> Note: The free Render instance spins down after inactivity. First request may take ~30 seconds to wake up.
 
 ---
 
@@ -17,7 +54,7 @@ Base URL: `https://your-app.onrender.com`
 
 ---
 
-## Getting Started
+## Getting Started Locally
 
 ### Prerequisites
 
@@ -27,7 +64,7 @@ Base URL: `https://your-app.onrender.com`
 ### Installation
 
 ```bash
-git clone https://github.com/yourusername/SchoolManagement-API.git
+git clone https://github.com/ASrivatsav27/SchoolManagement-API.git
 cd SchoolManagement-API/backend
 npm install
 ```
