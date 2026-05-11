@@ -1,0 +1,108 @@
+{
+  "info": {
+    "name": "SchoolManagement-API",
+    "description": "Postman collection for the School Management API — add schools and retrieve them sorted by proximity.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Health Check",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://schoolmanagement-api-ee8h.onrender.com/",
+          "protocol": "https",
+          "host": ["schoolmanagement-api-ee8h", "onrender", "com"],
+          "path": [""]
+        },
+        "description": "Check if the API is running."
+      },
+      "response": [
+        {
+          "name": "Success",
+          "status": "OK",
+          "code": 200,
+          "body": "{\n  \"message\": \"SchoolManagement API is running 🚀\"\n}"
+        }
+      ]
+    },
+    {
+      "name": "Add School",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Green Valley School\",\n  \"address\": \"123 MG Road, Hyderabad\",\n  \"latitude\": 17.385044,\n  \"longitude\": 78.486671\n}"
+        },
+        "url": {
+          "raw": "https://schoolmanagement-api-ee8h.onrender.com/school/add-school",
+          "protocol": "https",
+          "host": ["schoolmanagement-api-ee8h", "onrender", "com"],
+          "path": ["school", "add-school"]
+        },
+        "description": "Adds a new school to the database. All fields are required. Latitude must be between -90 and 90, longitude between -180 and 180."
+      },
+      "response": [
+        {
+          "name": "Success",
+          "status": "Created",
+          "code": 201,
+          "body": "{\n  \"success\": true,\n  \"message\": \"School added successfully\",\n  \"data\": {\n    \"id\": 1,\n    \"name\": \"Green Valley School\",\n    \"address\": \"123 MG Road, Hyderabad\",\n    \"latitude\": 17.385044,\n    \"longitude\": 78.486671\n  }\n}"
+        },
+        {
+          "name": "Validation Error",
+          "status": "Bad Request",
+          "code": 400,
+          "body": "{\n  \"success\": false,\n  \"message\": \"All fields are required\"\n}"
+        }
+      ]
+    },
+    {
+      "name": "List Schools",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://schoolmanagement-api-ee8h.onrender.com/school/list-schools?latitude=17.385044&longitude=78.486671",
+          "protocol": "https",
+          "host": ["schoolmanagement-api-ee8h", "onrender", "com"],
+          "path": ["school", "list-schools"],
+          "query": [
+            {
+              "key": "latitude",
+              "value": "17.385044",
+              "description": "User's latitude (-90 to 90)"
+            },
+            {
+              "key": "longitude",
+              "value": "78.486671",
+              "description": "User's longitude (-180 to 180)"
+            }
+          ]
+        },
+        "description": "Fetches all schools sorted by distance from the user's location. Distance is in kilometers using the Haversine formula."
+      },
+      "response": [
+        {
+          "name": "Success",
+          "status": "OK",
+          "code": 200,
+          "body": "{\n  \"success\": true,\n  \"count\": 3,\n  \"data\": [\n    {\n      \"id\": 1,\n      \"name\": \"Green Valley School\",\n      \"address\": \"123 MG Road, Hyderabad\",\n      \"latitude\": 17.385,\n      \"longitude\": 78.4867,\n      \"distance\": 0.01\n    },\n    {\n      \"id\": 2,\n      \"name\": \"Delhi Public School\",\n      \"address\": \"Banjara Hills, Hyderabad\",\n      \"latitude\": 17.4109,\n      \"longitude\": 78.4558,\n      \"distance\": 4.36\n    },\n    {\n      \"id\": 3,\n      \"name\": \"Sunrise Academy\",\n      \"address\": \"Gachibowli, Hyderabad\",\n      \"latitude\": 17.4407,\n      \"longitude\": 78.3486,\n      \"distance\": 15.9\n    }\n  ]\n}"
+        },
+        {
+          "name": "Missing Parameters",
+          "status": "Bad Request",
+          "code": 400,
+          "body": "{\n  \"success\": false,\n  \"message\": \"latitude and longitude are required\"\n}"
+        }
+      ]
+    }
+  ]
+}
